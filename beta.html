@@ -123,7 +123,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
 .success-icon{width:64px;height:64px;border-radius:50%;background:rgba(69,177,145,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
 .success-email{color:var(--teal);font-weight:600;font-size:16px}
 
-@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate):not(.nav-active){display:none}.page{padding:100px 18px 60px}}
+@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate):not(.nav-active){display:none}.nav-links #navUserBadge{display:inline-flex!important}.page{padding:100px 18px 60px}}
 </style>
 </head>
 <body>
@@ -237,7 +237,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
     </div>
 
     <h2 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:var(--white);margin-bottom:8px">Choose Your Platform</h2>
-    <p style="font-size:14px;color:var(--gray);margin-bottom:4px">Select which store you'd like beta access for. We'll notify you as soon as it's available.</p>
+    <p style="font-size:14px;color:var(--gray);margin-bottom:4px">Select which store you'd like beta access for and we'll open an email with everything prefilled.</p>
 
     <div class="platform-grid">
       <!-- Windows -->
@@ -247,7 +247,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
         </div>
         <div class="platform-name">Microsoft Store</div>
         <div class="platform-label">Windows 10/11</div>
-        <button class="btn-request" id="btnWindows" onclick="requestBeta('halt-windows-beta','btnWindows')">
+        <button class="btn-request" id="btnWindows" onclick="requestBeta('Microsoft Store','Windows')">
           Request Access
         </button>
       </div>
@@ -258,14 +258,14 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
         </div>
         <div class="platform-name">App Store</div>
         <div class="platform-label">macOS / iOS</div>
-        <button class="btn-request" id="btnMacOS" onclick="requestBeta('halt-macos-beta','btnMacOS')">
+        <button class="btn-request" id="btnMacOS" onclick="requestBeta('App Store','macOS / iOS')">
           Request Access
         </button>
       </div>
     </div>
 
-    <p style="font-size:12px;color:#555;text-align:center;margin-top:24px;letter-spacing:.03em">
-      You can also <a href="index.html#solution" style="color:var(--teal);text-decoration:none">download HALT directly</a> — no store account needed.
+    <p style="font-size:13px;color:var(--gray);text-align:center;margin-top:28px;line-height:1.7;max-width:420px;margin-left:auto;margin-right:auto">
+      We're a small team with a limited number of spots in the closed beta. Thank you for your interest and support — it means the world to us. We'll review every request and get back to you as soon as we can. 💚
     </p>
   </div>
 </main>
@@ -359,8 +359,6 @@ function showSignedInView() {
   }
 
   updateNavUser();
-  // Check existing beta requests
-  checkExistingRequests();
 }
 
 function updateNavUser() {
@@ -609,70 +607,31 @@ function handleSignOut() {
   resetBetaButton('btnMacOS');
 }
 
-// ── BETA REQUEST ───────────────────────────────────────────────
-async function requestBeta(slug, btnId) {
-  const btn = document.getElementById(btnId);
-  if (btn.classList.contains('btn-requested')) return;
+// ── BETA REQUEST (mailto) ──────────────────────────────────────
+function requestBeta(storeName, platform) {
+  const user = getUser();
+  const email = user ? user.email : 'Not signed in';
+  const name = user ? (user.displayName || user.email.split('@')[0]) : '';
 
-  const token = getToken();
-  if (!token) { showAuthView(); return; }
+  const subject = encodeURIComponent(`HALT Closed Beta Request — ${storeName}`);
+  const body = encodeURIComponent(
+    `Hi Hermetic Labs,\n\n` +
+    `I'd like to request access to the HALT closed beta.\n\n` +
+    `Platform: ${storeName} (${platform})\n` +
+    `Name: ${name}\n` +
+    `Email: ${email}\n\n` +
+    `Thank you!`
+  );
 
-  btn.disabled = true;
-  btn.innerHTML = '<span class="spinner spinner-light"></span>';
-
-  try {
-    await fetch(`${API}/wishlist`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-      },
-      body: JSON.stringify({ productId: slug, productSlug: slug }),
-    });
-
-    btn.innerHTML = '✓ Requested';
-    btn.classList.add('btn-requested');
-    btn.disabled = false;
-  } catch (err) {
-    btn.innerHTML = 'Request Access';
-    btn.disabled = false;
-    console.warn('Beta request failed:', err);
-  }
+  window.open(`mailto:Frontdesk@7hermeticlabs.com?subject=${subject}&body=${body}`, '_self');
 }
 
 function resetBetaButton(btnId) {
   const btn = document.getElementById(btnId);
-  btn.innerHTML = 'Request Access';
-  btn.classList.remove('btn-requested');
-  btn.disabled = false;
-}
-
-async function checkExistingRequests() {
-  const token = getToken();
-  if (!token) return;
-
-  try {
-    const res = await fetch(`${API}/wishlist`, {
-      headers: { 'Authorization': `Bearer ${token}` },
-    });
-    if (!res.ok) return;
-    const data = await res.json();
-    const items = data.data || [];
-
-    for (const item of items) {
-      if (item.productSlug === 'halt-windows-beta') {
-        const btn = document.getElementById('btnWindows');
-        btn.innerHTML = '✓ Requested';
-        btn.classList.add('btn-requested');
-      }
-      if (item.productSlug === 'halt-macos-beta') {
-        const btn = document.getElementById('btnMacOS');
-        btn.innerHTML = '✓ Requested';
-        btn.classList.add('btn-requested');
-      }
-    }
-  } catch (err) {
-    console.warn('Failed to check existing requests:', err);
+  if (btn) {
+    btn.innerHTML = 'Request Access';
+    btn.classList.remove('btn-requested');
+    btn.disabled = false;
   }
 }
 
