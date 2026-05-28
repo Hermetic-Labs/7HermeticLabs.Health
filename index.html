@@ -28,6 +28,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-links a:hover{color:var(--teal)}
 .nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
 .nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
+.nav-user{display:flex;align-items:center;gap:8px;color:var(--teal);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(69,177,145,.25);border-radius:4px;background:rgba(69,177,145,.08)}
+.nav-user-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
 
 /* LANG TICKER */
 .ticker-wrap{position:absolute;top:0;left:0;right:0;height:36px;overflow:hidden;background:rgba(69,177,145,.06);border-bottom:1px solid var(--border);display:flex;align-items:center}
@@ -196,7 +199,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
 .fi.vis{opacity:1;transform:translateY(0)}
 
 @media(max-width:900px){.hero-logo{height:clamp(320px,55vw,520px)}}
-@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}section{padding:68px 18px}.cost-box{padding:36px 24px}.hero-logo{height:clamp(220px,48vw,380px)}}
+@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}.nav-links #navUserBadge{display:inline-flex!important}section{padding:68px 18px}.cost-box{padding:36px 24px}.hero-logo{height:clamp(220px,48vw,380px)}}
 </style>
 </head>
 <body>
@@ -207,6 +210,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
     <a href="#problem">The Problem</a>
     <a href="#solution">The Solution</a>
     <a href="#languages">42 Languages</a>
+    <span id="navUserBadge" style="display:none"></span>
     <a href="beta.html">Beta Access</a>
     <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">☕ Buy Us a Coffee</a>
   </div>
@@ -580,6 +584,20 @@ function downloadMac(e) {
     window.location.href = R2 + '/HALT-latest-macOS-arm64.zip';
   }
 }
+
+// ── AUTH BADGE ──────────────────────────────────────────────────
+(function initAuthBadge() {
+  try {
+    const user = JSON.parse(localStorage.getItem('hermetic_auth_user'));
+    const token = localStorage.getItem('hermetic_auth_token');
+    const badge = document.getElementById('navUserBadge');
+    if (user && token && badge) {
+      const name = user.displayName || user.email.split('@')[0];
+      badge.innerHTML = '<span class="nav-user"><span class="nav-user-dot"></span>Signed in as ' + name + '</span>';
+      badge.style.display = '';
+    }
+  } catch (e) {}
+})();
 
 </script>
 </body>
