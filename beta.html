@@ -28,6 +28,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:cen
 .nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
 .nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
 .nav-active{color:var(--teal)!important}
+.nav-user{display:flex;align-items:center;gap:8px;color:var(--teal);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(69,177,145,.25);border-radius:4px;background:rgba(69,177,145,.08)}
+.nav-user-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+.btn-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#111;color:var(--lgray);border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:10px}
+.btn-google:hover{border-color:var(--gray);background:#1a1a1a}
+.btn-google:disabled{opacity:.5;cursor:not-allowed}
 
 /* PAGE */
 .page{max-width:520px;margin:0 auto;padding:120px 24px 80px}
@@ -126,7 +132,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
 <nav>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <a href="index.html#solution">Download</a>
+    <span id="navUserBadge" style="display:none"></span>
     <a href="beta.html" class="nav-active">Beta Access</a>
     <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">☕ Buy Us a Coffee</a>
   </div>
@@ -144,6 +150,12 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
       <p class="auth-sub" id="authSub">Sign in with your Hermetic Labs account</p>
 
       <div id="authError" class="msg msg-error" style="display:none"></div>
+
+      <!-- Google Sign-In -->
+      <button class="btn-google" id="btnGoogle" onclick="handleGoogleLogin()">
+        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
+        Sign in with Google
+      </button>
 
       <!-- Microsoft Sign-In -->
       <button class="btn-ms" id="btnMicrosoft" onclick="handleMicrosoftLogin()">
@@ -274,6 +286,8 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
 
 <!-- MSAL -->
 <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
+<!-- Google Identity Services -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 
 <script>
 // ── CONFIG ─────────────────────────────────────────────────────
@@ -281,6 +295,7 @@ const API = 'https://hermetic-labs-api-cthme4a9gcgdfwfc.eastus-01.azurewebsites.
 const TOKEN_KEY = 'hermetic_auth_token';
 const USER_KEY = 'hermetic_auth_user';
 const MS_CLIENT_ID = '17a0f6b6-4285-4272-af72-3bbbd2937973';
+const GOOGLE_CLIENT_ID = '311078548827-26uctc9qb8rdsu4kidn5tmek37ivsttq.apps.googleusercontent.com';
 
 let authMode = 'login'; // 'login' | 'register'
 
@@ -321,6 +336,7 @@ function showAuthView() {
   document.getElementById('authSection').style.display = '';
   document.getElementById('successSection').style.display = 'none';
   document.getElementById('signedInSection').style.display = 'none';
+  updateNavUser();
 }
 
 function showSuccessView(email) {
@@ -342,8 +358,21 @@ function showSignedInView() {
     document.getElementById('userAvatar').textContent = (user.displayName || user.email)[0].toUpperCase();
   }
 
+  updateNavUser();
   // Check existing beta requests
   checkExistingRequests();
+}
+
+function updateNavUser() {
+  const badge = document.getElementById('navUserBadge');
+  const user = getUser();
+  if (user && getToken()) {
+    const name = user.displayName || user.email.split('@')[0];
+    badge.innerHTML = '<span class="nav-user"><span class="nav-user-dot"></span>Signed in as ' + name + '</span>';
+    badge.style.display = '';
+  } else {
+    badge.style.display = 'none';
+  }
 }
 
 // ── MODE TOGGLE ────────────────────────────────────────────────
@@ -506,6 +535,62 @@ async function handleMicrosoftLogin() {
     if (err.errorCode === 'user_cancelled') { setLoading(btn, false); return; }
     showError(err.message || 'Microsoft authentication failed');
   } finally {
+    setLoading(btn, false);
+  }
+}
+
+// ── GOOGLE LOGIN ───────────────────────────────────────────────
+function handleGoogleLogin() {
+  hideError();
+  const btn = document.getElementById('btnGoogle');
+  setLoading(btn, true);
+
+  try {
+    google.accounts.id.initialize({
+      client_id: GOOGLE_CLIENT_ID,
+      callback: async (response) => {
+        try {
+          const res = await fetch(`${API}/auth/google`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ credential: response.credential }),
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Google login failed');
+          setAuth(data.data.token, data.data.user);
+          showSignedInView();
+        } catch (err) {
+          showError(err.message || 'Google authentication failed');
+        } finally {
+          setLoading(btn, false);
+        }
+      },
+    });
+    google.accounts.id.prompt((notification) => {
+      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
+        // One Tap not available, fall back to popup
+        google.accounts.id.renderButton(
+          document.createElement('div'),
+          { type: 'standard' }
+        );
+        // Use the credential select flow
+        const gDiv = document.createElement('div');
+        gDiv.id = '_gsi_tmp';
+        gDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999';
+        document.body.appendChild(gDiv);
+        google.accounts.id.renderButton(gDiv, {
+          type: 'standard',
+          theme: 'filled_black',
+          size: 'large',
+          width: 320,
+        });
+        gDiv.querySelector('[role=button]')?.click();
+        setTimeout(() => gDiv.remove(), 500);
+        setLoading(btn, false);
+      }
+    });
+  } catch (err) {
+    showError('Google sign-in is not available');
     setLoading(btn, false);
   }
 }
