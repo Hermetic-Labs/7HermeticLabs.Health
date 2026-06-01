@@ -2,25 +2,22 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="canonical" href="https://7hermeticlabs.health/beta.html" />
 <title>HALT — Request Beta Access | Hermetic Labs</title>
 <link rel="icon" type="image/png" href="favicon.png"/>
-<meta name="description" content="Sign up for closed beta access to HALT on Microsoft Store and Apple App Store."/>
-<!-- Open Graph / Social Cards -->
+<meta name="description" content="Request early access to HALT — a free, offline medical coordination system for conflict zones. 42 languages. No internet required."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://7hermeticlabs.health/beta.html"/>
 <meta property="og:site_name" content="Hermetic Labs"/>
 <meta property="og:title" content="Request Beta Access — HALT Field Medical System"/>
-<meta property="og:description" content="Be first in line. HALT is a free, offline medical coordination system for conflict zones coming to Microsoft Store and Apple App Store. 42 languages. No internet required."/>
+<meta property="og:description" content="HALT is in closed beta. We're onboarding NGOs, medical organizations, and disaster response teams ahead of the full launch."/>
 <meta property="og:image" content="https://7hermeticlabs.health/hero_field_medical.png"/>
 <meta property="og:image:width" content="1200"/>
 <meta property="og:image:height" content="630"/>
-<meta property="og:image:alt" content="Field medic treating a patient — HALT closed beta access"/>
-<!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Request Beta Access — HALT Field Medical System"/>
-<meta name="twitter:description" content="Be first in line. HALT is a free, offline medical coordination system for conflict zones coming to Microsoft Store and Apple App Store. 42 languages. No internet required."/>
+<meta name="twitter:description" content="HALT is in closed beta. We're onboarding NGOs, medical organizations, and disaster response teams ahead of the full launch."/>
 <meta name="twitter:image" content="https://7hermeticlabs.health/hero_field_medical.png"/>
-<meta name="twitter:image:alt" content="Field medic treating a patient — HALT closed beta access"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -36,110 +33,74 @@
 html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;min-height:100vh}
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+/* NAV — solid, no blur, no scroll changes */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:#080808;border-bottom:1px solid var(--border)}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
-.nav-links a:hover{color:var(--teal)}
+.nav-links a:hover,.nav-links a.nav-active{color:var(--teal)}
 .nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
 .nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
-.nav-active{color:var(--teal)!important}
-.nav-user{display:flex;align-items:center;gap:8px;color:var(--teal);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(69,177,145,.25);border-radius:4px;background:rgba(69,177,145,.08)}
-.nav-user-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
-.btn-google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#111;color:var(--lgray);border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s;margin-bottom:10px}
-.btn-google:hover{border-color:var(--gray);background:#1a1a1a}
-.btn-google:disabled{opacity:.5;cursor:not-allowed}
+@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}}
 
-/* PAGE */
-.page{max-width:520px;margin:0 auto;padding:120px 24px 80px}
+/* PAGE LAYOUT */
+.page{max-width:600px;margin:0 auto;padding:110px 24px 80px}
+
+/* BADGE */
 .page-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber-glow);border:1px solid rgba(245,158,11,.3);color:var(--amber);padding:6px 16px;border-radius:100px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
-.page-title{font-family:'Montserrat',sans-serif;font-size:clamp(24px,4vw,32px);font-weight:900;letter-spacing:-.01em;color:var(--white);margin-bottom:10px;line-height:1.15}
-.page-sub{font-size:15px;color:var(--gray);line-height:1.7;margin-bottom:36px}
 
-/* AUTH PANEL */
-.auth-panel{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:36px 32px;margin-bottom:36px}
-.auth-title{font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:var(--white);margin-bottom:6px}
-.auth-sub{font-size:14px;color:var(--gray);margin-bottom:24px}
+/* HEADINGS */
+.page-title{font-family:'Montserrat',sans-serif;font-size:clamp(24px,4vw,34px);font-weight:900;letter-spacing:-.01em;color:var(--white);margin-bottom:12px;line-height:1.1}
+.page-sub{font-size:15px;color:var(--gray);line-height:1.75;margin-bottom:40px;max-width:520px}
 
-/* FORM */
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:13px;color:var(--gray);margin-bottom:6px;font-weight:500}
-.form-label .optional{color:#555;font-weight:400}
-.form-input{width:100%;background:#111;border:1px solid var(--border);border-radius:6px;padding:12px 14px;color:var(--white);font-family:'Inter',sans-serif;font-size:14px;outline:none;transition:border-color .2s}
-.form-input:focus{border-color:var(--teal)}
-.form-input::placeholder{color:#444}
-.pw-wrap{position:relative}
-.pw-toggle{position:absolute;right:12px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--gray);cursor:pointer;font-size:13px;padding:4px}
-.pw-toggle:hover{color:var(--white)}
+/* FORM CARD */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:40px 40px 36px}
+@media(max-width:600px){.form-card{padding:28px 20px 24px}}
 
-/* STRENGTH */
-.pw-strength{display:flex;gap:3px;margin-top:8px}
-.pw-bar{height:3px;flex:1;border-radius:2px;background:rgba(255,255,255,.08);transition:background .3s}
-.pw-label{font-size:11px;margin-top:4px;transition:color .3s}
+/* FORM FIELDS */
+.field{margin-bottom:22px}
+.field label{display:block;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.field label .req{color:var(--teal);margin-left:2px}
+.field input,.field select,.field textarea{width:100%;background:#111;border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.field input::placeholder,.field textarea::placeholder{color:#555}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(69,177,145,.1)}
+.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a0a0a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.field select option{background:#111}
+.field textarea{resize:vertical;min-height:90px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
 
-/* BUTTONS */
-.btn-primary{display:block;width:100%;background:var(--teal);color:#000;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;text-align:center;padding:14px;border:none;border-radius:6px;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s}
-.btn-primary:hover{background:#5dd5ad;transform:translateY(-1px);box-shadow:0 0 24px rgba(69,177,145,.3)}
-.btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-ms{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;background:#111;color:var(--lgray);border:1px solid var(--border);border-radius:6px;padding:12px;font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;transition:border-color .2s,background .2s}
-.btn-ms:hover{border-color:var(--gray);background:#1a1a1a}
-.btn-ms:disabled{opacity:.5;cursor:not-allowed}
-.btn-ms svg{flex-shrink:0}
+/* PLATFORM SELECT */
+.platform-group{display:flex;gap:10px;flex-wrap:wrap}
+.platform-btn{flex:1;min-width:100px;background:#111;border:1px solid var(--border);border-radius:6px;color:var(--gray);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 14px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;text-align:center}
+.platform-btn:hover{border-color:var(--teal);color:var(--teal)}
+.platform-btn.selected{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.08)}
 
-.divider{display:flex;align-items:center;gap:14px;margin:20px 0;color:#444;font-size:12px;font-family:'Montserrat',sans-serif;letter-spacing:.08em;text-transform:uppercase}
-.divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border)}
+/* SUBMIT */
+.btn-submit{width:100%;background:var(--teal);color:#000;border:none;border-radius:6px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(69,177,145,.25);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-submit:hover:not(:disabled){background:#5dd5ad;transform:translateY(-1px);box-shadow:0 0 40px rgba(69,177,145,.4)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-.toggle-link{color:var(--teal);background:none;border:none;cursor:pointer;font-size:14px;font-weight:500;text-decoration:none}
-.toggle-link:hover{text-decoration:underline}
-.auth-footer{text-align:center;margin-top:20px;font-size:14px;color:var(--gray)}
+/* ERROR */
+.form-error{display:none;align-items:center;gap:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:6px;color:#f87171;font-size:13px;padding:12px 16px;margin-bottom:20px}
 
-/* ERROR / SUCCESS */
-.msg{padding:12px 16px;border-radius:6px;font-size:13px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;line-height:1.5}
-.msg-error{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.3);color:#f87171}
-.msg-success{background:rgba(69,177,145,.12);border:1px solid rgba(69,177,145,.3);color:var(--teal)}
+/* SUCCESS STATE */
+.success-state{display:none;text-align:center;padding:48px 24px}
+.success-icon{font-size:48px;margin-bottom:20px}
+.success-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--white);margin-bottom:12px}
+.success-body{font-size:15px;color:var(--gray);line-height:1.7;max-width:420px;margin:0 auto 28px}
+.success-tag{display:inline-block;background:rgba(69,177,145,.1);border:1px solid rgba(69,177,145,.3);color:var(--teal);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-radius:100px}
 
-/* SIGNED IN STATE */
-.user-bar{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-bottom:36px}
-.user-info{display:flex;align-items:center;gap:12px}
-.user-avatar{width:36px;height:36px;border-radius:50%;background:var(--teal);display:flex;align-items:center;justify-content:center;font-family:'Montserrat',sans-serif;font-weight:700;color:#000;font-size:14px}
-.user-name{font-size:14px;font-weight:600;color:var(--white)}
-.user-email{font-size:12px;color:var(--gray)}
-.btn-signout{background:none;border:1px solid var(--border);color:var(--gray);padding:6px 14px;border-radius:4px;font-size:11px;font-family:'Montserrat',sans-serif;font-weight:600;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;transition:border-color .2s,color .2s}
-.btn-signout:hover{border-color:var(--teal);color:var(--teal)}
-
-/* PLATFORM CARDS */
-.platform-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:24px}
-@media(max-width:500px){.platform-grid{grid-template-columns:1fr}}
-.platform-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:32px 24px;text-align:center;transition:border-color .3s,transform .2s}
-.platform-card:hover{border-color:rgba(245,158,11,.3);transform:translateY(-2px)}
-.platform-icon{margin-bottom:16px}
-.platform-icon svg{width:48px;height:48px;fill:var(--lgray)}
-.platform-name{font-family:'Montserrat',sans-serif;font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--white);margin-bottom:6px}
-.platform-label{font-size:12px;color:var(--gray);margin-bottom:20px}
-.btn-request{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--amber);border:1px solid rgba(245,158,11,.3);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:11px 24px;border-radius:4px;cursor:pointer;transition:background .2s,color .2s,transform .15s,box-shadow .2s;white-space:nowrap}
-.btn-request:hover{background:var(--amber-glow);transform:translateY(-1px);box-shadow:0 0 20px rgba(245,158,11,.15)}
-.btn-request:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
-.btn-requested{background:rgba(69,177,145,.1)!important;border-color:rgba(69,177,145,.3)!important;color:var(--teal)!important;cursor:default!important}
+/* NOTE */
+.form-note{font-size:12px;color:var(--gray);text-align:center;margin-top:20px;line-height:1.6;opacity:.7}
 
 /* FOOTER */
-footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
-.footer-links{display:flex;gap:26px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center}
+.footer-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
 .footer-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
 .footer-links a:hover{color:var(--teal)}
 .footer-copy{font-size:12px;color:#3a3a3a}
-
-/* SPINNER */
-.spinner{display:inline-block;width:16px;height:16px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite}
-.spinner-light{border-color:rgba(255,255,255,.2);border-top-color:var(--teal)}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-/* SUCCESS VIEW */
-.success-view{text-align:center;padding:20px 0}
-.success-icon{width:64px;height:64px;border-radius:50%;background:rgba(69,177,145,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px}
-.success-email{color:var(--teal);font-weight:600;font-size:16px}
-
-@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate):not(.nav-active){display:none}.nav-links #navUserBadge{display:inline-flex!important}.page{padding:100px 18px 60px}}
 </style>
 </head>
 <body>
@@ -148,142 +109,82 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
 <nav>
   <div class="nav-links">
     <a href="index.html">Home</a>
-    <span id="navUserBadge" style="display:none"></span>
     <a href="beta.html" class="nav-active">Beta Access</a>
-    <a href="halt-certification.html">Certification</a>
     <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">☕ Buy Us a Coffee</a>
   </div>
 </nav>
 
-<main class="page">
-  <div class="page-badge">🔒 Closed Beta</div>
-  <h1 class="page-title">Request Early Access to HALT</h1>
-  <p class="page-sub">We're preparing HALT for the Microsoft Store and Apple App Store. Sign in with your Hermetic Labs account to be first in line when it launches.</p>
+<!-- MAIN -->
+<main>
+  <div class="page">
+    <div class="page-badge">🔒 Closed Beta</div>
+    <h1 class="page-title">Request Early Access to HALT</h1>
+    <p class="page-sub">HALT is in closed beta. We're onboarding NGOs, medical organizations, disaster response teams, and vetted individuals ahead of the full launch. Tell us about yourself and we'll be in touch.</p>
 
-  <!-- AUTH SECTION (shown when not signed in) -->
-  <div id="authSection">
-    <div class="auth-panel">
-      <h2 class="auth-title" id="authTitle">Welcome Back</h2>
-      <p class="auth-sub" id="authSub">Sign in with your Hermetic Labs account</p>
+    <!-- FORM CARD -->
+    <div class="form-card" id="formCard">
 
-      <div id="authError" class="msg msg-error" style="display:none"></div>
+      <!-- ERROR -->
+      <div class="form-error" id="formError">
+        <span>⚠</span>
+        <span id="formErrorText">Something went wrong. Please try again.</span>
+      </div>
 
-      <!-- Google Sign-In -->
-      <button class="btn-google" id="btnGoogle" onclick="handleGoogleLogin()">
-        <svg width="18" height="18" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/><path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/><path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/><path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/></svg>
-        Sign in with Google
-      </button>
+      <form id="betaForm" novalidate>
 
-      <!-- Microsoft Sign-In -->
-      <button class="btn-ms" id="btnMicrosoft" onclick="handleMicrosoftLogin()">
-        <svg width="18" height="18" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
-          <rect x="1" y="1" width="9" height="9" fill="#f25022"/>
-          <rect x="11" y="1" width="9" height="9" fill="#7fba00"/>
-          <rect x="1" y="11" width="9" height="9" fill="#00a4ef"/>
-          <rect x="11" y="11" width="9" height="9" fill="#ffb900"/>
-        </svg>
-        Sign in with Microsoft
-      </button>
-
-      <div class="divider">or continue with email</div>
-
-      <form id="authForm" onsubmit="handleAuthSubmit(event)">
-        <!-- Display Name (register only) -->
-        <div class="form-group" id="nameGroup" style="display:none">
-          <label class="form-label">Display Name <span class="optional">(optional)</span></label>
-          <input class="form-input" type="text" id="inputName" placeholder="Your name" autocomplete="name"/>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" id="inputEmail" placeholder="you@example.com" autocomplete="email" required/>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">Password</label>
-          <div class="pw-wrap">
-            <input class="form-input" type="password" id="inputPassword" placeholder="••••••••" autocomplete="current-password" required/>
-            <button type="button" class="pw-toggle" onclick="togglePassword()">show</button>
+        <div class="field-row">
+          <div class="field">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fieldName" placeholder="Jane Smith" autocomplete="name" required/>
           </div>
-          <div id="pwStrength" style="display:none">
-            <div class="pw-strength"><div class="pw-bar" id="bar0"></div><div class="pw-bar" id="bar1"></div><div class="pw-bar" id="bar2"></div><div class="pw-bar" id="bar3"></div><div class="pw-bar" id="bar4"></div></div>
-            <div class="pw-label" id="pwLabel"></div>
+          <div class="field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" id="fieldEmail" placeholder="you@organization.org" autocomplete="email" required/>
           </div>
         </div>
 
-        <!-- Confirm Password (register only) -->
-        <div class="form-group" id="confirmGroup" style="display:none">
-          <label class="form-label">Confirm Password</label>
-          <input class="form-input" type="password" id="inputConfirm" placeholder="••••••••" autocomplete="new-password"/>
+        <div class="field-row">
+          <div class="field">
+            <label>Organization / Affiliation <span class="req">*</span></label>
+            <input type="text" id="fieldCompany" placeholder="Médecins Sans Frontières" required/>
+          </div>
+          <div class="field">
+            <label>Role / Title <span class="req">*</span></label>
+            <input type="text" id="fieldRole" placeholder="Field Coordinator" required/>
+          </div>
         </div>
 
-        <button type="submit" class="btn-primary" id="btnSubmit">Sign In</button>
+        <div class="field">
+          <label>Platform</label>
+          <div class="platform-group" id="platformGroup">
+            <button type="button" class="platform-btn selected" data-platform="Windows">🖥 Windows</button>
+            <button type="button" class="platform-btn" data-platform="macOS">🍎 macOS</button>
+            <button type="button" class="platform-btn" data-platform="Both">Both</button>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>Deployment Context <span class="req">*</span></label>
+          <textarea id="fieldUseCase" placeholder="Where would you use HALT? e.g. field hospital in South Sudan, 40-bed capacity, no connectivity, mixed volunteer staff..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmit">
+          Request Access
+        </button>
+
       </form>
 
-      <div class="auth-footer" id="authToggle">
-        Don't have an account? <button class="toggle-link" onclick="toggleMode()">Sign up</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- REGISTRATION SUCCESS (shown after register) -->
-  <div id="successSection" style="display:none">
-    <div class="auth-panel">
-      <div class="success-view">
-        <div class="success-icon">✉️</div>
-        <h2 class="auth-title" style="text-align:center">Check Your Email</h2>
-        <p class="auth-sub" style="text-align:center;margin-bottom:8px">We've sent a verification link to</p>
-        <p class="success-email" id="successEmail"></p>
-        <p style="color:var(--gray);font-size:13px;margin-top:16px;margin-bottom:24px">Click the link in your email to verify your account. Once verified, you'll be signed in automatically.</p>
-        <button class="btn-primary" onclick="backToLogin()">Back to Sign In</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- SIGNED IN STATE -->
-  <div id="signedInSection" style="display:none">
-    <div class="user-bar">
-      <div class="user-info">
-        <div class="user-avatar" id="userAvatar">?</div>
-        <div>
-          <div class="user-name" id="userName">User</div>
-          <div class="user-email" id="userEmail">email</div>
-        </div>
-      </div>
-      <button class="btn-signout" onclick="handleSignOut()">Sign Out</button>
+      <p class="form-note">We review every request manually. Closed beta — limited spots. We'll respond within 5 business days.</p>
     </div>
 
-    <h2 style="font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;color:var(--white);margin-bottom:8px">Choose Your Platform</h2>
-    <p style="font-size:14px;color:var(--gray);margin-bottom:4px">Select which store you'd like beta access for and we'll open an email with everything prefilled.</p>
-
-    <div class="platform-grid">
-      <!-- Windows -->
-      <div class="platform-card">
-        <div class="platform-icon">
-          <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-        </div>
-        <div class="platform-name">Microsoft Store</div>
-        <div class="platform-label">Windows 10/11</div>
-        <button class="btn-request" id="btnWindows" onclick="requestBeta('Microsoft Store','Windows')">
-          Request Access
-        </button>
-      </div>
-      <!-- macOS -->
-      <div class="platform-card">
-        <div class="platform-icon">
-          <svg viewBox="0 0 24 24"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11"/></svg>
-        </div>
-        <div class="platform-name">App Store</div>
-        <div class="platform-label">macOS / iOS</div>
-        <button class="btn-request" id="btnMacOS" onclick="requestBeta('App Store','macOS / iOS')">
-          Request Access
-        </button>
-      </div>
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">💚</div>
+      <div class="success-title">You're on the list.</div>
+      <p class="success-body">We've received your request and will review it manually. Thank you for caring about this problem as much as we do — we'll be in touch soon.</p>
+      <div class="success-tag">Request received · Review in progress</div>
     </div>
 
-    <p style="font-size:13px;color:var(--gray);text-align:center;margin-top:28px;line-height:1.7;max-width:420px;margin-left:auto;margin-right:auto">
-      We're a small team with a limited number of spots in the closed beta. Thank you for your interest and support — it means the world to us. We'll review every request and get back to you as soon as we can. 💚
-    </p>
   </div>
 </main>
 
@@ -291,376 +192,104 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center}
 <footer>
   <div class="footer-links">
     <a href="index.html">Home</a>
-    <a href="https://7hermeticlabs.com" target="_blank">Hermetic Labs</a>
-    <a href="https://7hermeticloops.com" target="_blank">Exchange</a>
-    <a href="https://github.com/Hermetic-Labs/halt" target="_blank">GitHub</a>
-    <a href="halt-certification.html">HALT Certification</a>
-    <a href="index.html#donate">☕ Buy Us a Coffee</a>
+    <a href="index.html#problem">The Problem</a>
+    <a href="index.html#solution">The Solution</a>
+    <a href="index.html#languages">42 Languages</a>
+    <a href="beta.html">Beta Access</a>
     <a href="terms.html">Terms</a>
     <a href="privacy.html">Privacy</a>
+    <a href="cookies.html">Cookies</a>
   </div>
   <p class="footer-copy">&copy; 2026 Hermetic Labs. All rights reserved.</p>
 </footer>
 
-<!-- MSAL -->
-<script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
-<!-- Google Identity Services -->
-<script src="https://accounts.google.com/gsi/client" async defer></script>
-
 <script>
-// ── CONFIG ─────────────────────────────────────────────────────
 const API = 'https://hermetic-labs-api-cthme4a9gcgdfwfc.eastus-01.azurewebsites.net/api';
-const TOKEN_KEY = 'hermetic_auth_token';
-const USER_KEY = 'hermetic_auth_user';
-const MS_CLIENT_ID = '17a0f6b6-4285-4272-af72-3bbbd2937973';
-const GOOGLE_CLIENT_ID = '311078548827-26uctc9qb8rdsu4kidn5tmek37ivsttq.apps.googleusercontent.com';
 
-let authMode = 'login'; // 'login' | 'register'
-
-// ── HELPERS ────────────────────────────────────────────────────
-function getToken() { return localStorage.getItem(TOKEN_KEY); }
-function getUser() { try { return JSON.parse(localStorage.getItem(USER_KEY)); } catch { return null; } }
-function setAuth(token, user) {
-  localStorage.setItem(TOKEN_KEY, token);
-  localStorage.setItem(USER_KEY, JSON.stringify(user));
-}
-function clearAuth() {
-  localStorage.removeItem(TOKEN_KEY);
-  localStorage.removeItem(USER_KEY);
-}
-
-function showError(msg) {
-  const el = document.getElementById('authError');
-  el.textContent = msg;
-  el.style.display = 'flex';
-}
-function hideError() {
-  document.getElementById('authError').style.display = 'none';
-}
-
-function setLoading(btn, loading) {
-  if (loading) {
-    btn.disabled = true;
-    btn._text = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner"></span>';
-  } else {
-    btn.disabled = false;
-    if (btn._text) btn.innerHTML = btn._text;
-  }
-}
-
-// ── VIEW MANAGEMENT ────────────────────────────────────────────
-function showAuthView() {
-  document.getElementById('authSection').style.display = '';
-  document.getElementById('successSection').style.display = 'none';
-  document.getElementById('signedInSection').style.display = 'none';
-  updateNavUser();
-}
-
-function showSuccessView(email) {
-  document.getElementById('authSection').style.display = 'none';
-  document.getElementById('successSection').style.display = '';
-  document.getElementById('signedInSection').style.display = 'none';
-  document.getElementById('successEmail').textContent = email;
-}
-
-function showSignedInView() {
-  document.getElementById('authSection').style.display = 'none';
-  document.getElementById('successSection').style.display = 'none';
-  document.getElementById('signedInSection').style.display = '';
-
-  const user = getUser();
-  if (user) {
-    document.getElementById('userName').textContent = user.displayName || user.email.split('@')[0];
-    document.getElementById('userEmail').textContent = user.email;
-    document.getElementById('userAvatar').textContent = (user.displayName || user.email)[0].toUpperCase();
-  }
-
-  updateNavUser();
-}
-
-function updateNavUser() {
-  const badge = document.getElementById('navUserBadge');
-  const user = getUser();
-  if (user && getToken()) {
-    const name = user.displayName || user.email.split('@')[0];
-    badge.innerHTML = '<span class="nav-user"><span class="nav-user-dot"></span>Signed in as ' + name + '</span>';
-    badge.style.display = '';
-  } else {
-    badge.style.display = 'none';
-  }
-}
-
-// ── MODE TOGGLE ────────────────────────────────────────────────
-function toggleMode() {
-  hideError();
-  if (authMode === 'login') {
-    authMode = 'register';
-    document.getElementById('authTitle').textContent = 'Create Account';
-    document.getElementById('authSub').textContent = 'Sign up for a Hermetic Labs account';
-    document.getElementById('nameGroup').style.display = '';
-    document.getElementById('confirmGroup').style.display = '';
-    document.getElementById('btnSubmit').textContent = 'Create Account';
-    document.getElementById('authToggle').innerHTML = 'Already have an account? <button class="toggle-link" onclick="toggleMode()">Sign in</button>';
-    document.getElementById('inputPassword').autocomplete = 'new-password';
-    document.getElementById('pwStrength').style.display = '';
-  } else {
-    authMode = 'login';
-    document.getElementById('authTitle').textContent = 'Welcome Back';
-    document.getElementById('authSub').textContent = 'Sign in with your Hermetic Labs account';
-    document.getElementById('nameGroup').style.display = 'none';
-    document.getElementById('confirmGroup').style.display = 'none';
-    document.getElementById('btnSubmit').textContent = 'Sign In';
-    document.getElementById('authToggle').innerHTML = 'Don\'t have an account? <button class="toggle-link" onclick="toggleMode()">Sign up</button>';
-    document.getElementById('inputPassword').autocomplete = 'current-password';
-    document.getElementById('pwStrength').style.display = 'none';
-  }
-}
-
-function togglePassword() {
-  const input = document.getElementById('inputPassword');
-  const confirm = document.getElementById('inputConfirm');
-  const btn = document.querySelector('.pw-toggle');
-  if (input.type === 'password') {
-    input.type = 'text';
-    confirm.type = 'text';
-    btn.textContent = 'hide';
-  } else {
-    input.type = 'password';
-    confirm.type = 'password';
-    btn.textContent = 'show';
-  }
-}
-
-function backToLogin() {
-  authMode = 'register';
-  toggleMode(); // toggles to login
-  showAuthView();
-}
-
-// ── PASSWORD STRENGTH ──────────────────────────────────────────
-document.getElementById('inputPassword').addEventListener('input', function() {
-  if (authMode !== 'register') return;
-  const pw = this.value;
-  let score = 0;
-  if (pw.length >= 8) score++;
-  if (pw.length >= 12) score++;
-  if (/[A-Z]/.test(pw)) score++;
-  if (/[0-9]/.test(pw)) score++;
-  if (/[^A-Za-z0-9]/.test(pw)) score++;
-
-  const labels = ['Very Weak','Weak','Fair','Strong','Very Strong'];
-  const colors = ['#ff4466','#ff8844','#ddaa44','#44cc66','#00ff99'];
-  const idx = Math.min(score, 4);
-
-  for (let i = 0; i < 5; i++) {
-    document.getElementById('bar' + i).style.background = i < score ? colors[idx] : 'rgba(255,255,255,.08)';
-  }
-  const label = document.getElementById('pwLabel');
-  label.textContent = pw ? labels[idx] : '';
-  label.style.color = colors[idx];
+// ── PLATFORM TOGGLE ────────────────────────────────────────────
+let selectedPlatform = 'Windows';
+document.querySelectorAll('.platform-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.platform-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+    selectedPlatform = btn.dataset.platform;
+  });
 });
 
-// ── AUTH SUBMIT ────────────────────────────────────────────────
-async function handleAuthSubmit(e) {
+// ── ERROR HELPERS ──────────────────────────────────────────────
+function showError(msg) {
+  const el = document.getElementById('formError');
+  document.getElementById('formErrorText').textContent = msg;
+  el.style.display = 'flex';
+  el.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function hideError() {
+  document.getElementById('formError').style.display = 'none';
+}
+
+// ── SUBMIT ─────────────────────────────────────────────────────
+document.getElementById('betaForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   hideError();
 
-  const email = document.getElementById('inputEmail').value.trim();
-  const password = document.getElementById('inputPassword').value;
-  const btn = document.getElementById('btnSubmit');
+  const name     = document.getElementById('fieldName').value.trim();
+  const email    = document.getElementById('fieldEmail').value.trim();
+  const company  = document.getElementById('fieldCompany').value.trim();
+  const role     = document.getElementById('fieldRole').value.trim();
+  const useCase  = document.getElementById('fieldUseCase').value.trim();
 
-  if (!email || !password) { showError('Please fill in all fields'); return; }
-
-  if (authMode === 'register') {
-    const confirm = document.getElementById('inputConfirm').value;
-    if (password !== confirm) { showError('Passwords do not match'); return; }
-    if (password.length < 8) { showError('Password must be at least 8 characters'); return; }
-
-    setLoading(btn, true);
-    try {
-      const name = document.getElementById('inputName').value.trim();
-      const body = { email, password };
-      if (name) body.displayName = name;
-
-      const res = await fetch(`${API}/auth/register`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Registration failed');
-      showSuccessView(email);
-    } catch (err) {
-      showError(err.message);
-    } finally {
-      setLoading(btn, false);
-    }
-  } else {
-    setLoading(btn, true);
-    try {
-      const res = await fetch(`${API}/auth/login`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password }),
-      });
-      const data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'Login failed');
-      setAuth(data.data.token, data.data.user);
-      showSignedInView();
-    } catch (err) {
-      showError(err.message);
-    } finally {
-      setLoading(btn, false);
-    }
+  if (!name || !email || !company || !role || !useCase) {
+    showError('Please fill in all required fields.');
+    return;
   }
-}
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showError('Please enter a valid email address.');
+    return;
+  }
 
-// ── MICROSOFT LOGIN ────────────────────────────────────────────
-async function handleMicrosoftLogin() {
-  hideError();
-  const btn = document.getElementById('btnMicrosoft');
-  setLoading(btn, true);
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Submitting...';
 
   try {
-    const msalInstance = new msal.PublicClientApplication({
-      auth: {
-        clientId: MS_CLIENT_ID,
-        authority: 'https://login.microsoftonline.com/common',
-        redirectUri: window.location.origin,
-      },
-    });
-    await msalInstance.initialize();
-
-    const result = await msalInstance.loginPopup({
-      scopes: ['openid', 'profile', 'email'],
-    });
-
-    if (!result.idToken) throw new Error('No token received');
-
-    const res = await fetch(`${API}/auth/microsoft`, {
+    const res = await fetch(`${API}/beta/signup`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ idToken: result.idToken }),
+      body: JSON.stringify({
+        fullName: name,
+        email,
+        company,
+        role,
+        useCase: `[Platform: ${selectedPlatform}] ${useCase}`,
+        interestedModules: []
+      })
     });
+
     const data = await res.json();
-    if (!res.ok) throw new Error(data.error || 'Microsoft login failed');
-    setAuth(data.data.token, data.data.user);
-    showSignedInView();
-  } catch (err) {
-    if (err.errorCode === 'user_cancelled') { setLoading(btn, false); return; }
-    showError(err.message || 'Microsoft authentication failed');
-  } finally {
-    setLoading(btn, false);
-  }
-}
 
-// ── GOOGLE LOGIN ───────────────────────────────────────────────
-function handleGoogleLogin() {
-  hideError();
-  const btn = document.getElementById('btnGoogle');
-  setLoading(btn, true);
-
-  try {
-    google.accounts.id.initialize({
-      client_id: GOOGLE_CLIENT_ID,
-      callback: async (response) => {
-        try {
-          const res = await fetch(`${API}/auth/google`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ credential: response.credential }),
-          });
-          const data = await res.json();
-          if (!res.ok) throw new Error(data.error || 'Google login failed');
-          setAuth(data.data.token, data.data.user);
-          showSignedInView();
-        } catch (err) {
-          showError(err.message || 'Google authentication failed');
-        } finally {
-          setLoading(btn, false);
-        }
-      },
-    });
-    google.accounts.id.prompt((notification) => {
-      if (notification.isNotDisplayed() || notification.isSkippedMoment()) {
-        // One Tap not available, fall back to popup
-        google.accounts.id.renderButton(
-          document.createElement('div'),
-          { type: 'standard' }
-        );
-        // Use the credential select flow
-        const gDiv = document.createElement('div');
-        gDiv.id = '_gsi_tmp';
-        gDiv.style.cssText = 'position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);z-index:9999';
-        document.body.appendChild(gDiv);
-        google.accounts.id.renderButton(gDiv, {
-          type: 'standard',
-          theme: 'filled_black',
-          size: 'large',
-          width: 320,
-        });
-        gDiv.querySelector('[role=button]')?.click();
-        setTimeout(() => gDiv.remove(), 500);
-        setLoading(btn, false);
+    if (!res.ok) {
+      // 409 = already registered
+      if (res.status === 409) {
+        showError('This email is already on the list. We\'ll be in touch soon.');
+      } else {
+        throw new Error(data.error || 'Submission failed. Please try again.');
       }
-    });
+      btn.disabled = false;
+      btn.innerHTML = 'Request Access';
+      return;
+    }
+
+    // SUCCESS
+    document.getElementById('formCard').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
   } catch (err) {
-    showError('Google sign-in is not available');
-    setLoading(btn, false);
-  }
-}
-
-// ── SIGN OUT ───────────────────────────────────────────────────
-function handleSignOut() {
-  clearAuth();
-  showAuthView();
-  // Reset form
-  document.getElementById('inputEmail').value = '';
-  document.getElementById('inputPassword').value = '';
-  document.getElementById('inputConfirm').value = '';
-  document.getElementById('inputName').value = '';
-  // Reset beta buttons
-  resetBetaButton('btnWindows');
-  resetBetaButton('btnMacOS');
-}
-
-// ── BETA REQUEST (mailto) ──────────────────────────────────────
-function requestBeta(storeName, platform) {
-  const user = getUser();
-  const email = user ? user.email : 'Not signed in';
-  const name = user ? (user.displayName || user.email.split('@')[0]) : '';
-
-  const subject = encodeURIComponent(`HALT Closed Beta Request — ${storeName}`);
-  const body = encodeURIComponent(
-    `Hi Hermetic Labs,\n\n` +
-    `I'd like to request access to the HALT closed beta.\n\n` +
-    `Platform: ${storeName} (${platform})\n` +
-    `Name: ${name}\n` +
-    `Email: ${email}\n\n` +
-    `Thank you!`
-  );
-
-  window.open(`mailto:Frontdesk@7hermeticlabs.com?subject=${subject}&body=${body}`, '_self');
-}
-
-function resetBetaButton(btnId) {
-  const btn = document.getElementById(btnId);
-  if (btn) {
-    btn.innerHTML = 'Request Access';
-    btn.classList.remove('btn-requested');
+    showError(err.message || 'Network error. Please check your connection and try again.');
     btn.disabled = false;
+    btn.innerHTML = 'Request Access';
   }
-}
-
-// ── INIT ───────────────────────────────────────────────────────
-(function init() {
-  if (getToken() && getUser()) {
-    showSignedInView();
-  } else {
-    showAuthView();
-  }
-})();
+});
 </script>
 </body>
 </html>

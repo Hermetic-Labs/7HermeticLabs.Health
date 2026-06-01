@@ -37,7 +37,7 @@ html{scroll-behavior:smooth}
 body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden}
 
 /* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:rgba(0,0,0,.88);backdrop-filter:blur(14px);border-bottom:1px solid var(--border)}
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:#080808;border-bottom:1px solid var(--border)}
 .nav-logo img{height:34px;width:auto}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
@@ -226,9 +226,8 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
     <a href="#problem">The Problem</a>
     <a href="#solution">The Solution</a>
     <a href="#languages">42 Languages</a>
-    <span id="navUserBadge" style="display:none"></span>
     <a href="beta.html">Beta Access</a>
-    <a href="halt-certification.html">Certification</a>
+    <a href="access.html">Source Access</a>
     <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">☕ Buy Us a Coffee</a>
   </div>
 </nav>
@@ -245,12 +244,8 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
   <h1 class="hero-h1">When Every Second Counts,<span class="hl">Language Shouldn't Be the Barrier.</span></h1>
   <p class="hero-sub">Field Medical Coordination &nbsp;—&nbsp; Anywhere on Earth</p>
   <p class="hero-desc">A complete, free, offline medical coordination system built for conflict zones, disaster response, and the places the world forgets. No internet. No subscriptions. No servers. Just a laptop — and the people who need it most.</p>
-  <div class="hero-ctas">
-    <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="btn-p">☕ &nbsp;Buy Us a Coffee</a>
-    <a href="#solution" class="btn-s">Learn How It Works →</a>
-  </div>
   <!-- Store Beta Access -->
-  <div class="dl-platforms" style="margin-top:18px">
+  <div class="dl-platforms" style="margin-top:32px">
     <a href="beta.html" class="btn-platform" style="border-color:rgba(245,158,11,.3);color:rgba(245,158,11,.85)" title="Request access on Microsoft Store">
       <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
       Microsoft Store — Closed Beta
@@ -260,9 +255,9 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
       App Store — Closed Beta
     </a>
   </div>
-  <a href="https://github.com/Hermetic-Labs/halt" target="_blank" class="hero-contribute">
+  <a href="access.html" class="hero-contribute">
     <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-    Help Build the Tools That Save Lives
+    Source Access for NGOs &amp; Research Institutions →
   </a>
 </section>
 
@@ -319,24 +314,6 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
       <div class="feat-card fi"><span class="feat-emoji">💬</span><div class="feat-t">Real-Time Communication</div><div class="feat-d">Video calls between medics over local mesh. Text messaging with auto-translation. Voice notes that transcribe and translate. All without internet.</div></div>
       <div class="feat-card fi"><span class="feat-emoji">📦</span><div class="feat-t">Supply Tracking</div><div class="feat-d">Real-time inventory across all locations with automatic low-stock warnings and consumption pattern tracking.</div></div>
       <div class="feat-card fi"><span class="feat-emoji">✈️</span><div class="feat-t">Fully Offline</div><div class="feat-d">The entire system — AI, translation, voice, records — runs on a single laptop. Deploy under active bombardment where connectivity is impossible.</div></div>
-    </div>
-
-    <!-- DOWNLOAD CARD -->
-    <div class="dl-card fi">
-      <div class="dl-card-text">
-        <div class="dl-title">↓ &nbsp;Download HALT — Free &amp; Open Source</div>
-        <div class="dl-sub">The system is real. It runs today. Download, unzip, and run — everything is included. No account required. No internet needed after download.</div>
-      </div>
-      <div class="dl-card-buttons">
-        <a href="https://apps.microsoft.com/detail/9N07GL497X57" target="_blank" class="btn-dl">
-          <svg viewBox="0 0 24 24"><path d="M0 3.449L9.75 2.1v9.451H0m10.949-9.602L24 0v11.4H10.949M0 12.6h9.75v9.451L0 20.699M10.949 12.6H24V24l-12.9-1.801"/></svg>
-          Microsoft Store
-        </a>
-        <a href="https://github.com/Hermetic-Labs/halt" target="_blank" class="btn-gh">
-          <svg viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
-          Contribute on GitHub
-        </a>
-      </div>
     </div>
   </div>
 </section>
@@ -426,16 +403,13 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
 
 <!-- FOOTER -->
 <footer>
-  <p class="footer-tag" style="font-size:14px;margin-bottom:10px">❤️ From America with love &nbsp;·&nbsp; Home grown in the beautiful and talented state of Georgia 🍑</p>
   <p class="footer-tag">Built with care for the people who run toward the worst moments in the world so the rest of us don't have to.</p>
   <div class="footer-links">
-    <a href="https://7hermeticlabs.com" target="_blank">Main Website</a>
     <a href="#problem">The Problem</a>
     <a href="#solution">The Solution</a>
-    <a href="#languages">Languages</a>
-    <a href="halt-certification.html">HALT Certification</a>
-    <a href="https://github.com/Hermetic-Labs/halt" target="_blank">GitHub</a>
-    <a href="#donate">☕ Buy Us a Coffee</a>
+    <a href="#languages">42 Languages</a>
+    <a href="beta.html">Beta Access</a>
+    <a href="access.html">Source Access</a>
     <a href="terms.html">Terms</a>
     <a href="privacy.html">Privacy</a>
     <a href="cookies.html">Cookies</a>
@@ -603,19 +577,7 @@ function downloadMac(e) {
   }
 }
 
-// ── AUTH BADGE ──────────────────────────────────────────────────
-(function initAuthBadge() {
-  try {
-    const user = JSON.parse(localStorage.getItem('hermetic_auth_user'));
-    const token = localStorage.getItem('hermetic_auth_token');
-    const badge = document.getElementById('navUserBadge');
-    if (user && token && badge) {
-      const name = user.displayName || user.email.split('@')[0];
-      badge.innerHTML = '<span class="nav-user"><span class="nav-user-dot"></span>Signed in as ' + name + '</span>';
-      badge.style.display = '';
-    }
-  } catch (e) {}
-})();
+
 
 </script>
 </body>

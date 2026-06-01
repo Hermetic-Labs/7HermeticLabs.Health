@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<link rel="canonical" href="https://7hermeticlabs.health/access.html" />
+<title>HALT — Source Code Access | Hermetic Labs</title>
+<link rel="icon" type="image/png" href="favicon.png"/>
+<meta name="description" content="Request source code access to HALT for humanitarian research, NGO deployment, or institutional use. Vetted access for qualified organizations."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://7hermeticlabs.health/access.html"/>
+<meta property="og:site_name" content="Hermetic Labs"/>
+<meta property="og:title" content="Source Code Access — HALT Field Medical System"/>
+<meta property="og:description" content="HALT source is available to vetted NGOs, academic institutions, and government health agencies. Request access and connect to the repository."/>
+<meta property="og:image" content="https://7hermeticlabs.health/hero_field_medical.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --black:#000;--near:#080808;--card:#0d0d0d;
+  --border:rgba(255,255,255,.08);--teal:#45B191;
+  --teal-glow:rgba(69,177,145,.15);--white:#fff;
+  --gray:#a0a0a0;--lgray:#d0d0d0;
+  --amber:#f59e0b;--amber-glow:rgba(245,158,11,.12);
+  --red-glow:rgba(239,68,68,.1);
+}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;min-height:100vh}
+
+/* NAV — solid */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:#080808;border-bottom:1px solid var(--border)}
+.nav-links{display:flex;gap:28px;align-items:center}
+.nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover,.nav-links a.nav-active{color:var(--teal)}
+.nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
+.nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
+@media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}}
+
+/* PAGE */
+.page{max-width:720px;margin:0 auto;padding:110px 24px 80px}
+
+/* BADGE */
+.page-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(69,177,145,.08);border:1px solid rgba(69,177,145,.25);color:var(--teal);padding:6px 16px;border-radius:100px;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:24px}
+
+/* HEADINGS */
+.page-title{font-family:'Montserrat',sans-serif;font-size:clamp(26px,4vw,38px);font-weight:900;letter-spacing:-.01em;color:var(--white);margin-bottom:14px;line-height:1.1}
+.page-sub{font-size:15px;color:var(--gray);line-height:1.75;margin-bottom:48px;max-width:600px}
+
+/* QUALIFICATIONS GRID */
+.qual-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:48px}
+@media(max-width:640px){.qual-grid{grid-template-columns:1fr}}
+.qual-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:18px 20px}
+.qual-card.yes{border-color:rgba(69,177,145,.2);background:rgba(69,177,145,.04)}
+.qual-card.no{border-color:rgba(239,68,68,.2);background:rgba(239,68,68,.04)}
+.qual-label{font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:10px}
+.qual-card.yes .qual-label{color:var(--teal)}
+.qual-card.no .qual-label{color:#f87171}
+.qual-item{font-size:13px;color:var(--lgray);padding:5px 0;border-bottom:1px solid var(--border);display:flex;align-items:flex-start;gap:8px}
+.qual-item:last-child{border-bottom:none;padding-bottom:0}
+.qual-item .dot{flex-shrink:0;margin-top:6px;width:5px;height:5px;border-radius:50%}
+.qual-card.yes .dot{background:var(--teal)}
+.qual-card.no .dot{background:#f87171}
+
+/* DIVIDER */
+.sec-divider{border:none;border-top:1px solid var(--border);margin:48px 0}
+
+/* FORM SECTION HEADER */
+.form-section-title{font-family:'Montserrat',sans-serif;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:20px}
+
+/* FORM CARD */
+.form-card{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:40px 40px 36px;margin-bottom:12px}
+@media(max-width:600px){.form-card{padding:24px 18px}}
+
+/* FIELDS */
+.field{margin-bottom:22px}
+.field label{display:block;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gray);margin-bottom:8px}
+.field label .req{color:var(--teal);margin-left:2px}
+.field label .hint{font-family:'Inter',sans-serif;font-size:11px;font-weight:400;letter-spacing:0;text-transform:none;color:#555;margin-left:6px}
+.field input,.field select,.field textarea{width:100%;background:#111;border:1px solid var(--border);border-radius:6px;color:var(--white);font-family:'Inter',sans-serif;font-size:14px;padding:12px 16px;outline:none;transition:border-color .2s,box-shadow .2s;-webkit-appearance:none}
+.field input::placeholder,.field textarea::placeholder{color:#555}
+.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(69,177,145,.1)}
+.field select{cursor:pointer;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23a0a0a0' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px}
+.field select option{background:#111}
+.field textarea{resize:vertical;min-height:100px;line-height:1.6}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:480px){.field-row{grid-template-columns:1fr}}
+
+/* CONTEXT BOX */
+.context-box{background:rgba(69,177,145,.04);border:1px solid rgba(69,177,145,.15);border-radius:8px;padding:16px 20px;margin-bottom:22px}
+.context-box p{font-size:13px;color:var(--gray);line-height:1.65}
+.context-box strong{color:var(--lgray)}
+
+/* SUBMIT */
+.btn-submit{width:100%;background:var(--teal);color:#000;border:none;border-radius:6px;font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;padding:16px 24px;cursor:pointer;transition:background .2s,transform .15s,box-shadow .2s;box-shadow:0 0 28px rgba(69,177,145,.2);margin-top:8px;display:flex;align-items:center;justify-content:center;gap:10px}
+.btn-submit:hover:not(:disabled){background:#5dd5ad;transform:translateY(-1px);box-shadow:0 0 40px rgba(69,177,145,.35)}
+.btn-submit:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.spinner{width:16px;height:16px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ERROR */
+.form-error{display:none;align-items:center;gap:10px;background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.3);border-radius:6px;color:#f87171;font-size:13px;padding:12px 16px;margin-bottom:20px}
+
+/* SUCCESS */
+.success-state{display:none;text-align:center;padding:60px 24px}
+.success-icon{font-size:48px;margin-bottom:20px}
+.success-title{font-family:'Montserrat',sans-serif;font-size:22px;font-weight:900;color:var(--white);margin-bottom:12px}
+.success-body{font-size:15px;color:var(--gray);line-height:1.7;max-width:480px;margin:0 auto 28px}
+.success-tag{display:inline-block;background:rgba(69,177,145,.1);border:1px solid rgba(69,177,145,.3);color:var(--teal);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:6px 18px;border-radius:100px}
+
+/* NOTE */
+.form-note{font-size:12px;color:var(--gray);text-align:center;margin-top:18px;line-height:1.65;opacity:.7}
+.form-note a{color:var(--teal);text-decoration:none}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:36px 24px;text-align:center}
+.footer-links{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.footer-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
+.footer-links a:hover{color:var(--teal)}
+.footer-copy{font-size:12px;color:#3a3a3a}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="beta.html">Beta Access</a>
+    <a href="access.html" class="nav-active">Source Access</a>
+    <a href="https://buy.stripe.com/9B6bJ3cs62yf0sz9Fx5EY01" target="_blank" class="nav-donate">☕ Buy Us a Coffee</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+  <div class="page">
+
+    <!-- HEADER -->
+    <div class="page-badge">⚙ Source Code Access</div>
+    <h1 class="page-title">Connect to the Repository</h1>
+    <p class="page-sub">HALT's source code is available to vetted organizations with a documented humanitarian use case. We keep the repo private to prevent misuse — not to keep it locked away. If your work qualifies, we want to get you running.</p>
+
+    <!-- WHO QUALIFIES -->
+    <div class="qual-grid">
+      <div class="qual-card yes">
+        <div class="qual-label">✓ Qualifies</div>
+        <div class="qual-item"><span class="dot"></span>NGOs with humanitarian medical mandate</div>
+        <div class="qual-item"><span class="dot"></span>Academic &amp; research institutions</div>
+        <div class="qual-item"><span class="dot"></span>Government health agencies</div>
+        <div class="qual-item"><span class="dot"></span>Military medical commands (medical use)</div>
+        <div class="qual-item"><span class="dot"></span>Independent developers with verifiable humanitarian project</div>
+      </div>
+      <div class="qual-card no">
+        <div class="qual-label">✗ Does Not Qualify</div>
+        <div class="qual-item"><span class="dot"></span>Defense procurement or weapons systems</div>
+        <div class="qual-item"><span class="dot"></span>Commercial redistribution without agreement</div>
+        <div class="qual-item"><span class="dot"></span>Anonymous or unverifiable applicants</div>
+        <div class="qual-item"><span class="dot"></span>Surveillance or population control use</div>
+        <div class="qual-item"><span class="dot"></span>Any use inconsistent with the HALT Humanitarian Use License</div>
+      </div>
+    </div>
+
+    <hr class="sec-divider"/>
+
+    <!-- FORM -->
+    <div id="formWrap">
+
+      <div class="form-error" id="formError">
+        <span>⚠</span>
+        <span id="formErrorText">Something went wrong. Please try again.</span>
+      </div>
+
+      <!-- PART 1: WHO YOU ARE -->
+      <div class="form-section-title">01 — Who You Are</div>
+      <div class="form-card">
+        <div class="field-row">
+          <div class="field">
+            <label>Full Name <span class="req">*</span></label>
+            <input type="text" id="fieldName" placeholder="Jane Smith" autocomplete="name" required/>
+          </div>
+          <div class="field">
+            <label>Email <span class="req">*</span></label>
+            <input type="email" id="fieldEmail" placeholder="you@institution.org" autocomplete="email" required/>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Organization <span class="req">*</span></label>
+            <input type="text" id="fieldOrg" placeholder="Johns Hopkins University" required/>
+          </div>
+          <div class="field">
+            <label>Organization Type <span class="req">*</span></label>
+            <select id="fieldOrgType" required>
+              <option value="" disabled selected>Select type...</option>
+              <option value="ngo">NGO / Humanitarian Organization</option>
+              <option value="academic">Academic / Research Institution</option>
+              <option value="government">Government Health Agency</option>
+              <option value="military_medical">Military Medical Command</option>
+              <option value="independent">Independent Developer</option>
+              <option value="other">Other (explain below)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Role / Title <span class="req">*</span></label>
+            <input type="text" id="fieldRole" placeholder="Research Scientist"/>
+          </div>
+          <div class="field">
+            <label>GitHub Username <span class="req">*</span> <span class="hint">— for repo access</span></label>
+            <input type="text" id="fieldGithub" placeholder="your-github-handle"/>
+          </div>
+        </div>
+      </div>
+
+      <!-- PART 2: YOUR DEPLOYMENT -->
+      <div class="form-section-title" style="margin-top:32px">02 — Your Deployment or Research</div>
+
+      <div class="context-box">
+        <p>These questions help us get you up and running faster — not gatekeep. <strong>Answer honestly</strong> and we'll know exactly what to brief you on when we onboard you.</p>
+      </div>
+
+      <div class="form-card">
+        <div class="field">
+          <label>What problem are you solving with HALT? <span class="req">*</span></label>
+          <textarea id="fieldProblem" placeholder="e.g. We run a 60-bed field hospital in eastern DRC with no reliable connectivity and a multilingual volunteer staff. We need coordinated triage and patient records that work offline..." required></textarea>
+        </div>
+        <div class="field">
+          <label>What's your deployment environment? <span class="req">*</span> <span class="hint">— hardware, OS, connectivity</span></label>
+          <textarea id="fieldEnv" placeholder="e.g. Windows laptops (mix of x64), generator power only, no internet, local mesh via Meshtastic radios..." style="min-height:70px" required></textarea>
+        </div>
+        <div class="field-row">
+          <div class="field">
+            <label>Team size <span class="hint">— approximate</span></label>
+            <input type="text" id="fieldTeam" placeholder="e.g. 8 medics, 15 volunteers"/>
+          </div>
+          <div class="field">
+            <label>Medical training level of staff</label>
+            <select id="fieldTraining">
+              <option value="" disabled selected>Select...</option>
+              <option value="physicians">Physicians / Surgeons</option>
+              <option value="nurses">Nurses / Paramedics</option>
+              <option value="mixed">Mixed trained + volunteers</option>
+              <option value="volunteers">Primarily volunteers, minimal training</option>
+              <option value="research">Research / No clinical deployment</option>
+            </select>
+          </div>
+        </div>
+        <div class="field">
+          <label>Do you have an existing patient records system? <span class="hint">— replacing or supplementing?</span></label>
+          <input type="text" id="fieldExisting" placeholder="e.g. Paper charts only. / We use KoBoToolbox but it requires internet."/>
+        </div>
+        <div class="field">
+          <label>Anything else we should know?</label>
+          <textarea id="fieldNotes" placeholder="IRB approval status, timeline, specific languages needed, partnership with other orgs, etc." style="min-height:70px"></textarea>
+        </div>
+
+        <button type="button" class="btn-submit" id="btnSubmit" onclick="submitForm()">
+          Request Source Access
+        </button>
+
+        <p class="form-note">
+          We review manually and respond within 5 business days.<br/>
+          Full policy: <a href="https://github.com/Hermetic-Labs/HALT-SourceCode/blob/main/ACCESS.md" target="_blank">ACCESS.md</a> · <a href="https://github.com/Hermetic-Labs/HALT-SourceCode/blob/main/LICENSE" target="_blank">HALT Humanitarian Use License</a>
+        </p>
+      </div>
+
+    </div><!-- /formWrap -->
+
+    <!-- SUCCESS -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">🔓</div>
+      <div class="success-title">Request received.</div>
+      <p class="success-body">We review every source access request manually against our humanitarian use policy. We'll respond within 5 business days — typically with a brief onboarding call to make sure you're set up correctly from the start.</p>
+      <div class="success-tag">Under review · Expect a response within 5 days</div>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="index.html#problem">The Problem</a>
+    <a href="index.html#solution">The Solution</a>
+    <a href="index.html#languages">42 Languages</a>
+    <a href="beta.html">Beta Access</a>
+    <a href="access.html">Source Access</a>
+    <a href="terms.html">Terms</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="cookies.html">Cookies</a>
+  </div>
+  <p class="footer-copy">&copy; 2026 Hermetic Labs. All rights reserved.</p>
+</footer>
+
+<script>
+const API = 'https://hermetic-labs-api-cthme4a9gcgdfwfc.eastus-01.azurewebsites.net/api';
+
+function showError(msg) {
+  const el = document.getElementById('formError');
+  document.getElementById('formErrorText').textContent = msg;
+  el.style.display = 'flex';
+  el.scrollIntoView({behavior:'smooth', block:'nearest'});
+}
+function hideError() {
+  document.getElementById('formError').style.display = 'none'; }
+
+async function submitForm() {
+  hideError();
+
+  const name     = document.getElementById('fieldName').value.trim();
+  const email    = document.getElementById('fieldEmail').value.trim();
+  const org      = document.getElementById('fieldOrg').value.trim();
+  const orgType  = document.getElementById('fieldOrgType').value;
+  const role     = document.getElementById('fieldRole').value.trim();
+  const github   = document.getElementById('fieldGithub').value.trim();
+  const problem  = document.getElementById('fieldProblem').value.trim();
+  const env      = document.getElementById('fieldEnv').value.trim();
+  const team     = document.getElementById('fieldTeam').value.trim();
+  const training = document.getElementById('fieldTraining').value;
+  const existing = document.getElementById('fieldExisting').value.trim();
+  const notes    = document.getElementById('fieldNotes').value.trim();
+
+  if (!name || !email || !org || !orgType || !role || !github || !problem || !env) {
+    showError('Please fill in all required fields.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showError('Please enter a valid email address.');
+    return;
+  }
+
+  const btn = document.getElementById('btnSubmit');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Submitting...';
+
+  // Build a structured useCase that captures all the deployment details
+  const useCase = [
+    `[SOURCE ACCESS REQUEST]`,
+    `GitHub: ${github}`,
+    `Org Type: ${orgType}`,
+    `Problem: ${problem}`,
+    `Environment: ${env}`,
+    team     ? `Team: ${team}` : null,
+    training ? `Training level: ${training}` : null,
+    existing ? `Existing system: ${existing}` : null,
+    notes    ? `Notes: ${notes}` : null,
+  ].filter(Boolean).join('\n');
+
+  try {
+    const res = await fetch(`${API}/beta/signup`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        fullName: name,
+        email,
+        company: org,
+        role,
+        useCase,
+        interestedModules: []
+      })
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      if (res.status === 409) {
+        showError('This email already has a pending request. We\'ll be in touch soon.');
+      } else {
+        throw new Error(data.error || 'Submission failed. Please try again.');
+      }
+      btn.disabled = false;
+      btn.innerHTML = 'Request Source Access';
+      return;
+    }
+
+    // SUCCESS
+    document.getElementById('formWrap').style.display = 'none';
+    document.getElementById('successState').style.display = 'block';
+    window.scrollTo({top: 0, behavior: 'smooth'});
+
+  } catch (err) {
+    showError(err.message || 'Network error. Please check your connection and try again.');
+    btn.disabled = false;
+    btn.innerHTML = 'Request Source Access';
+  }
+}
+</script>
+</body>
+</html>
