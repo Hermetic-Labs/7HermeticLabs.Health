@@ -38,15 +38,12 @@ body{background:var(--black);color:var(--white);font-family:'Inter',sans-serif;f
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:flex-end;padding:14px 48px;background:#080808;border-bottom:1px solid var(--border)}
-.nav-logo img{height:34px;width:auto}
 .nav-links{display:flex;gap:28px;align-items:center}
 .nav-links a{color:var(--gray);text-decoration:none;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;transition:color .2s}
 .nav-links a:hover{color:var(--teal)}
 .nav-donate{background:var(--teal)!important;color:#000!important;padding:8px 20px;border-radius:4px;font-weight:700!important;transition:background .2s,transform .15s!important}
 .nav-donate:hover{background:#57cca9!important;transform:translateY(-1px)}
-.nav-user{display:flex;align-items:center;gap:8px;color:var(--teal);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border:1px solid rgba(69,177,145,.25);border-radius:4px;background:rgba(69,177,145,.08)}
-.nav-user-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse 2s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:.5}50%{opacity:1}}
+
 
 /* LANG TICKER */
 .ticker-wrap{position:absolute;top:0;left:0;right:0;height:36px;overflow:hidden;background:rgba(69,177,145,.06);border-bottom:1px solid var(--border);display:flex;align-items:center}
@@ -216,6 +213,29 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
 
 @media(max-width:900px){.hero-logo{height:clamp(320px,55vw,520px)}}
 @media(max-width:768px){nav{padding:12px 18px}.nav-links a:not(.nav-donate){display:none}.nav-links #navUserBadge{display:inline-flex!important}section{padding:68px 18px}.cost-box{padding:36px 24px}.hero-logo{height:clamp(220px,48vw,380px)}}
+
+/* ── AUDIO PLAYER ─────────────────────────────────────────── */
+/* Trigger pill — sits in the hero */
+.hero-listen{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid var(--border);color:var(--gray);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;border-radius:100px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;margin-top:28px}
+.hero-listen:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.05)}
+.hero-listen svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
+/* Fixed bottom player bar */
+.halt-player{position:fixed;bottom:0;left:0;right:0;z-index:300;background:#080808;border-top:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;gap:18px;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
+.halt-player.open{transform:translateY(0)}
+.halt-player-play{width:34px;height:34px;border-radius:50%;background:var(--teal);border:none;color:#000;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s,transform .15s}
+.halt-player-play:hover{background:#5dd5ad;transform:scale(1.05)}
+.halt-player-play svg{width:13px;height:13px;fill:#000}
+.halt-player-info{min-width:0;flex-shrink:0}
+.halt-player-label{display:block;font-family:'Montserrat',sans-serif;font-size:9px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);margin-bottom:2px}
+.halt-player-title{display:block;font-family:'Montserrat',sans-serif;font-size:11px;font-weight:600;color:var(--lgray);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
+.halt-player-progress{flex:1;height:3px;background:rgba(255,255,255,.08);border-radius:2px;cursor:pointer;position:relative;min-width:80px}
+.halt-player-progress:hover{height:5px;margin-top:-1px}
+.halt-player-fill{height:100%;background:var(--teal);border-radius:2px;width:0%;transition:width .1s linear;pointer-events:none}
+.halt-player-time{font-size:11px;color:var(--gray);font-family:'Montserrat',sans-serif;letter-spacing:.04em;flex-shrink:0;white-space:nowrap}
+.halt-player-close{background:none;border:none;color:var(--gray);font-size:16px;cursor:pointer;padding:4px 6px;line-height:1;transition:color .2s;flex-shrink:0}
+.halt-player-close:hover{color:var(--white)}
+@media(max-width:600px){.halt-player{padding:10px 16px;gap:12px}.halt-player-info{display:none}}
+
 </style>
 </head>
 <body>
@@ -244,6 +264,11 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
   <h1 class="hero-h1">When Every Second Counts,<span class="hl">Language Shouldn't Be the Barrier.</span></h1>
   <p class="hero-sub">Field Medical Coordination &nbsp;—&nbsp; Anywhere on Earth</p>
   <p class="hero-desc">A complete, free, offline medical coordination system built for conflict zones, disaster response, and the places the world forgets. No internet. No subscriptions. No servers. Just a laptop — and the people who need it most.</p>
+  <!-- Audio Explainer Trigger -->
+  <button class="hero-listen" id="listenTrigger" onclick="HaltPlayer.open()">
+    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+    Listen — 3-min explainer
+  </button>
   <!-- Store Beta Access -->
   <div class="dl-platforms" style="margin-top:32px">
     <a href="beta.html" class="btn-platform" style="border-color:rgba(245,158,11,.3);color:rgba(245,158,11,.85)" title="Request access on Microsoft Store">
@@ -405,6 +430,7 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
 <footer>
   <p class="footer-tag">Built with care for the people who run toward the worst moments in the world so the rest of us don't have to.</p>
   <div class="footer-links">
+    <a href="index.html">Home</a>
     <a href="#problem">The Problem</a>
     <a href="#solution">The Solution</a>
     <a href="#languages">42 Languages</a>
@@ -580,5 +606,100 @@ function downloadMac(e) {
 
 
 </script>
+
+<!-- AUDIO PLAYER BAR -->
+<div class="halt-player" id="haltPlayer">
+  <button class="halt-player-play" id="haltPlayBtn" onclick="HaltPlayer.togglePlayback()" title="Play / Pause">
+    <svg viewBox="0 0 24 24" id="haltPlayIcon"><polygon points="5,3 19,12 5,21"/></svg>
+  </button>
+  <div class="halt-player-info">
+    <span class="halt-player-label">HALT Explainer</span>
+    <span class="halt-player-title">What is HALT and why does it matter?</span>
+  </div>
+  <div class="halt-player-progress" id="haltProgress" onclick="HaltPlayer.seek(event)">
+    <div class="halt-player-fill" id="haltFill"></div>
+  </div>
+  <span class="halt-player-time" id="haltTime">0:00 / 0:00</span>
+  <button class="halt-player-close" onclick="HaltPlayer.close()" title="Close player">&#x2715;</button>
+</div>
+
+<script>
+// ── HALT AUDIO PLAYER ──────────────────────────────────────────
+// Drop the explainer file into site/ as: halt-explainer.mp3
+// Then this just works — no other changes needed.
+const HaltPlayer = {
+  audio: new Audio(),
+  playing: false,
+  isOpen: false,
+
+  init() {
+    this.audio.src = 'halt-explainer.mp3'; // ← DROP POINT
+    this.audio.preload = 'metadata';
+    this.audio.addEventListener('timeupdate', () => this.updateProgress());
+    this.audio.addEventListener('ended', () => {
+      this.playing = false;
+      this.updateIcon();
+      // Reset so they can replay
+      this.audio.currentTime = 0;
+      document.getElementById('haltFill').style.width = '0%';
+    });
+  },
+
+  open() {
+    this.isOpen = true;
+    document.getElementById('haltPlayer').classList.add('open');
+    // Auto-play on open
+    this.audio.play().then(() => {
+      this.playing = true;
+      this.updateIcon();
+    }).catch(() => {
+      // Browser blocked autoplay — player opens, user taps play
+    });
+  },
+
+  close() {
+    this.isOpen = false;
+    document.getElementById('haltPlayer').classList.remove('open');
+    this.audio.pause();
+    this.playing = false;
+    this.updateIcon();
+  },
+
+  togglePlayback() {
+    if (this.playing) {
+      this.audio.pause();
+      this.playing = false;
+    } else {
+      this.audio.play().catch(() => {});
+      this.playing = true;
+    }
+    this.updateIcon();
+  },
+
+  seek(e) {
+    if (!this.audio.duration) return;
+    const rect = document.getElementById('haltProgress').getBoundingClientRect();
+    this.audio.currentTime = ((e.clientX - rect.left) / rect.width) * this.audio.duration;
+  },
+
+  updateProgress() {
+    if (!this.audio.duration) return;
+    const pct = (this.audio.currentTime / this.audio.duration) * 100;
+    document.getElementById('haltFill').style.width = pct + '%';
+    const fmt = t => Math.floor(t / 60) + ':' + Math.floor(t % 60).toString().padStart(2, '0');
+    document.getElementById('haltTime').textContent =
+      fmt(this.audio.currentTime) + ' / ' + fmt(this.audio.duration);
+  },
+
+  updateIcon() {
+    document.getElementById('haltPlayIcon').innerHTML = this.playing
+      ? '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>'
+      : '<polygon points="5,3 19,12 5,21"/>';
+  }
+};
+
+HaltPlayer.init();
+</script>
+
 </body>
 </html>
