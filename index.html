@@ -216,8 +216,10 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
 
 /* ── AUDIO PLAYER ─────────────────────────────────────────── */
 /* Trigger pill — sits in the hero */
-.hero-listen{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid var(--border);color:var(--gray);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;border-radius:100px;cursor:pointer;transition:border-color .2s,color .2s,background .2s;margin-top:28px}
-.hero-listen:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.05)}
+@keyframes teal-pulse{0%,100%{box-shadow:0 0 0 0 rgba(69,177,145,.3)}50%{box-shadow:0 0 0 8px rgba(69,177,145,0)}}
+.hero-listen{display:inline-flex;align-items:center;gap:10px;background:transparent;border:1px solid rgba(69,177,145,.35);color:var(--teal);font-family:'Montserrat',sans-serif;font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:10px 22px;border-radius:100px;cursor:pointer;transition:border-color .2s,color .2s,background .2s,box-shadow .2s;margin-top:28px;animation:teal-pulse 2.4s ease-in-out infinite}
+.hero-listen:hover{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.07);animation:none;box-shadow:0 0 0 8px rgba(69,177,145,.08)}
+.hero-listen.playing{border-color:var(--teal);color:var(--teal);background:rgba(69,177,145,.1);animation:none}
 .hero-listen svg{width:14px;height:14px;fill:currentColor;flex-shrink:0}
 /* Fixed bottom player bar */
 .halt-player{position:fixed;bottom:0;left:0;right:0;z-index:300;background:#080808;border-top:1px solid var(--border);padding:12px 40px;display:flex;align-items:center;gap:18px;transform:translateY(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)}
@@ -265,9 +267,9 @@ footer{border-top:1px solid var(--border);padding:44px 24px;text-align:center;po
   <p class="hero-sub">Field Medical Coordination &nbsp;—&nbsp; Anywhere on Earth</p>
   <p class="hero-desc">A complete, free, offline medical coordination system built for conflict zones, disaster response, and the places the world forgets. No internet. No subscriptions. No servers. Just a laptop — and the people who need it most.</p>
   <!-- Audio Explainer Trigger -->
-  <button class="hero-listen" id="listenTrigger" onclick="HaltPlayer.open()">
-    <svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
-    Listen — 3-min explainer
+  <button class="hero-listen" id="listenTrigger" onclick="HaltPlayer.toggleFromPill()">
+    <svg viewBox="0 0 24 24" id="pillIcon"><polygon points="5,3 19,12 5,21"/></svg>
+    <span id="pillLabel">Listen — 3-min explainer</span>
   </button>
   <!-- Store Beta Access -->
   <div class="dl-platforms" style="margin-top:32px">
@@ -639,7 +641,7 @@ const HaltPlayer = {
     this.audio.addEventListener('ended', () => {
       this.playing = false;
       this.updateIcon();
-      // Reset so they can replay
+      this.updatePill();
       this.audio.currentTime = 0;
       document.getElementById('haltFill').style.width = '0%';
     });
@@ -648,12 +650,12 @@ const HaltPlayer = {
   open() {
     this.isOpen = true;
     document.getElementById('haltPlayer').classList.add('open');
-    // Auto-play on open
     this.audio.play().then(() => {
       this.playing = true;
       this.updateIcon();
+      this.updatePill();
     }).catch(() => {
-      // Browser blocked autoplay — player opens, user taps play
+      this.updatePill();
     });
   },
 
@@ -663,6 +665,7 @@ const HaltPlayer = {
     this.audio.pause();
     this.playing = false;
     this.updateIcon();
+    this.updatePill();
   },
 
   togglePlayback() {
@@ -674,6 +677,7 @@ const HaltPlayer = {
       this.playing = true;
     }
     this.updateIcon();
+    this.updatePill();
   },
 
   seek(e) {
@@ -689,6 +693,33 @@ const HaltPlayer = {
     const fmt = t => Math.floor(t / 60) + ':' + Math.floor(t % 60).toString().padStart(2, '0');
     document.getElementById('haltTime').textContent =
       fmt(this.audio.currentTime) + ' / ' + fmt(this.audio.duration);
+  },
+
+  toggleFromPill() {
+    if (!this.isOpen) {
+      this.open();
+    } else {
+      this.togglePlayback();
+    }
+  },
+
+  updatePill() {
+    const pill = document.getElementById('listenTrigger');
+    const icon = document.getElementById('pillIcon');
+    const label = document.getElementById('pillLabel');
+    if (this.isOpen && this.playing) {
+      pill.classList.add('playing');
+      icon.innerHTML = '<rect x="5" y="3" width="4" height="18"/><rect x="15" y="3" width="4" height="18"/>';
+      label.textContent = 'Playing…';
+    } else if (this.isOpen && !this.playing) {
+      pill.classList.add('playing');
+      icon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+      label.textContent = 'Resume';
+    } else {
+      pill.classList.remove('playing');
+      icon.innerHTML = '<polygon points="5,3 19,12 5,21"/>';
+      label.textContent = 'Listen — 3-min explainer';
+    }
   },
 
   updateIcon() {
